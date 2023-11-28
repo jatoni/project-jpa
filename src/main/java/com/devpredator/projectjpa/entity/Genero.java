@@ -5,23 +5,26 @@ package com.devpredator.projectjpa.entity;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
- * @author jat_a Clase que representa el entity que mappea a la tabla de
- *         disquera con JPA
+ * @author jat_a Clase que representa la entidad de genero
  */
-
 @Entity
-@Table(name = "disquera")
-public class Disquera {
+@Table(name = "genero")
+public class Genero {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idDisquera")
-	private long idDisquera;
+	@Column(name = "idGenero")
+	private Long idGenero;
 
-	@Column(name = "descripcion", length = 100)
+	@Column(name = "descripcion")
 	private String descripcion;
 
 	@Column(name = "fechaCreacion")
@@ -34,17 +37,17 @@ public class Disquera {
 	private boolean estatus;
 
 	/**
-	 * @return the idDisquera
+	 * @return the idGenero
 	 */
-	public long getIdDisquera() {
-		return idDisquera;
+	public Long getIdGenero() {
+		return idGenero;
 	}
 
 	/**
-	 * @param idDisquera the idDisquera to set
+	 * @param idGenero the idGenero to set
 	 */
-	public void setIdDisquera(long idDisquera) {
-		this.idDisquera = idDisquera;
+	public void setIdGenero(Long idGenero) {
+		this.idGenero = idGenero;
 	}
 
 	/**
@@ -106,8 +109,8 @@ public class Disquera {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Disquera [idDisquera=");
-		builder.append(idDisquera);
+		builder.append("Genero [idGenero=");
+		builder.append(idGenero);
 		builder.append(", descripcion=");
 		builder.append(descripcion);
 		builder.append(", fechaCreacion=");

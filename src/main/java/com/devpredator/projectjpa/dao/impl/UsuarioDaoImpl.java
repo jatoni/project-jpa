@@ -21,7 +21,7 @@ import com.devpredator.projectjpa.entity.Disquera;
 public class UsuarioDaoImpl implements DisqueraDao {
 
 	private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
-			.createEntityManagerFactory("persistenceDevPredator");;
+			.createEntityManagerFactory("persistenceDevPredator");
 
 	@Override
 	public void guardar(Disquera disquera) {
@@ -102,6 +102,27 @@ public class UsuarioDaoImpl implements DisqueraDao {
 		TypedQuery<Disquera> disqueras = (TypedQuery<Disquera>) em.createQuery("FROM Disquera ORDER BY descripcion");
 
 		return disqueras.getResultList();
+	}
+
+	@Override
+	public Disquera consultarByDescripcionJPQL(String descripcion) {
+		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+
+		TypedQuery<Disquera> disqueras = (TypedQuery<Disquera>) em
+				.createQuery("FROM Disquera WHERE descripcion = :desc");
+		disqueras.setParameter("desc", descripcion);
+
+		return disqueras.getSingleResult();
+	}
+
+	@Override
+	public Disquera consultarByDescripcionNative(String descripcion) {
+		EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+		TypedQuery<Disquera> disqueras = (TypedQuery<Disquera>) em
+				.createNativeQuery("SELECT * FROM disquera WHERE descripcion = :desc", Disquera.class);
+		disqueras.setParameter("desc", descripcion);
+
+		return disqueras.getSingleResult();
 	}
 
 }

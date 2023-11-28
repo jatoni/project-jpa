@@ -3,6 +3,7 @@
  */
 package com.devpredator.projectjpa.dao.test;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDateTime;
@@ -69,7 +70,7 @@ class UsuarioDaoImplTest {
 	 */
 	@Test
 	void testEliminar() {
-		this.disqueraDao.eliminar(12L);
+		this.disqueraDao.eliminar(16L);
 	}
 
 	/**
@@ -78,8 +79,22 @@ class UsuarioDaoImplTest {
 	 */
 	@Test
 	void testConsultarById() {
-		Disquera disquera = disqueraDao.consultarById(20L);
+		Disquera disquera = disqueraDao.consultarById(9L);
 		System.out.print("Disquera: " + disquera.getDescripcion());
+	}
+
+	@Test
+	void testConsultarByDescripcionJPQL() {
+		Disquera disqueraConsultada = this.disqueraDao.consultarByDescripcionJPQL("Dsiquera IronMaiden");
+		assertNotNull(disqueraConsultada);
+		System.out.println("Disquera by Description: " + disqueraConsultada.toString());
+	}
+
+	@Test
+	void testConsultarByDescripcionNative() {
+		Disquera disqueraConsultada = this.disqueraDao.consultarByDescripcionNative("Dsiquera IronMaiden");
+		assertNotNull(disqueraConsultada);
+		System.out.println("Disquera by Description: " + disqueraConsultada.toString());
 	}
 
 }

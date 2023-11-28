@@ -7,22 +7,27 @@ import java.time.LocalDateTime;
 
 import javax.persistence.*;
 
-/**
- * @author jat_a Clase que representa el entity que mappea a la tabla de
- *         disquera con JPA
- */
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
+/**
+ * @author jat_a Clase que representa a una entidad de subgenero
+ */
 @Entity
-@Table(name = "disquera")
-public class Disquera {
+@Table(name = "subgenero")
+public class SubGenero {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idDisquera")
-	private long idDisquera;
+	private long idSubGenero;
 
-	@Column(name = "descripcion", length = 100)
+	@Column(name = "descripcion")
 	private String descripcion;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idGenero")
+	@Cascade(CascadeType.PERSIST)
+	private Genero genero;
 
 	@Column(name = "fechaCreacion")
 	private LocalDateTime fechaCreacion;
@@ -34,17 +39,17 @@ public class Disquera {
 	private boolean estatus;
 
 	/**
-	 * @return the idDisquera
+	 * @return the idSubGenero
 	 */
-	public long getIdDisquera() {
-		return idDisquera;
+	public long getIdSubGenero() {
+		return idSubGenero;
 	}
 
 	/**
-	 * @param idDisquera the idDisquera to set
+	 * @param idSubGenero the idSubGenero to set
 	 */
-	public void setIdDisquera(long idDisquera) {
-		this.idDisquera = idDisquera;
+	public void setIdSubGenero(long idSubGenero) {
+		this.idSubGenero = idSubGenero;
 	}
 
 	/**
@@ -59,6 +64,20 @@ public class Disquera {
 	 */
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	/**
+	 * @return the genero
+	 */
+	public Genero getGenero() {
+		return genero;
+	}
+
+	/**
+	 * @param genero the genero to set
+	 */
+	public void setGenero(Genero genero) {
+		this.genero = genero;
 	}
 
 	/**
@@ -106,10 +125,12 @@ public class Disquera {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Disquera [idDisquera=");
-		builder.append(idDisquera);
+		builder.append("SubGenero [idSubGenero=");
+		builder.append(idSubGenero);
 		builder.append(", descripcion=");
 		builder.append(descripcion);
+		builder.append(", genero=");
+		builder.append(genero);
 		builder.append(", fechaCreacion=");
 		builder.append(fechaCreacion);
 		builder.append(", fechaModificacion=");
